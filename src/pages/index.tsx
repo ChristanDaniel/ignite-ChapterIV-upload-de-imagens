@@ -8,8 +8,21 @@ import { api } from '../services/api';
 import { Loading } from '../components/Loading';
 import { Error } from '../components/Error';
 
+interface Image {
+  title: string;
+  description: string;
+  url: string;
+  ts: number;
+  id: string;
+}
+
+interface GetImagesResponse {
+  after: string;
+  data: Image[];
+}
+
 export default function Home(): JSX.Element {
-  async function fetchImage({ pageParam = null }) {
+  async function fetchImage({ pageParam = null }): Promise<GetImagesResponse> {
     const { data } = await api('/api/images', {
       params: {
         after: pageParam,
@@ -29,7 +42,10 @@ export default function Home(): JSX.Element {
   });
 
   const formattedData = useMemo(() => {
-    // TODO FORMAT AND FLAT DATA ARRAY
+    const formatted = data?.pages.flatMap(imageData => {
+      return imageData.data.flat();
+    });
+    return formatted;
   }, [data]);
 
   // TODO RENDER LOADING SCREEN
