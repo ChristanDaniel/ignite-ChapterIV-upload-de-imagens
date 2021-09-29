@@ -20,14 +20,15 @@ export function CardList({ cards }: CardsProps): JSX.Element {
 
   const [currentImageUrl, setCurrentImageUrl] = useState('');
 
-  function handleViewImage(url: string): void {
+  const handleViewImage = (url: string): void => {
+    // function handleViewImage(url: string): void {
     onOpen();
     setCurrentImageUrl(url);
-  }
+  };
 
   return (
     <>
-      <SimpleGrid column={[1, 2, 3]} spacing="40px">
+      <SimpleGrid columns={[1, 2, 3]} spacing="40px">
         {cards.map(card => (
           <Card key={card.id} data={card} viewImage={handleViewImage} />
         ))}
