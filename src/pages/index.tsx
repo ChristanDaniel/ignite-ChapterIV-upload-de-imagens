@@ -68,7 +68,7 @@ export default function Home(): JSX.Element {
             disabled={isFetchingNextPage}
             mt="6"
           >
-            {isFetchingNextPage ? 'Carregando...' : 'Carregar Mais'}
+            {isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}
           </Button>
         )}
       </Box>
